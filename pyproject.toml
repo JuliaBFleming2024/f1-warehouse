@@ -1,0 +1,15 @@
+[project]
+name = "f1-warehouse"
+version = "0.1.0"
+description = "End-to-end analytics pipeline prototype for Formula 1 data using dlt, Dagster, Postgres, and Streamlit."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "dagster",
+    "dagster-dg-cli>=1.12.3",
+    "dagster-webserver>=1.12.3",
+    "dlt>=1.18.2",
+    "fastf1>=3.7.0",
+    "dlt[postgres]",
+    "dlt[parquet]",
+]
