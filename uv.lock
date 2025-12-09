@@ -452,6 +452,19 @@ wheels = [
 ]
 
 [[package]]
+name = "dagster-dlt"
+version = "0.28.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "dagster" },
+    { name = "dlt" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/6d/2c/14a1d6d064e9a6fb8dd89b41cd70606faabbca2c0616156d8c7c69a51239/dagster_dlt-0.28.3.tar.gz", hash = "sha256:9087a970c1eb8fa81d833aae174d77ad7b51b5f51a1c6aecca025902f82a6cf4", size = 18041, upload-time = "2025-11-20T21:00:45.33Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/af/13/4e1dc97e8e626105d3c6dd305ee4a3bc2d04c924649021b2513cfdbb4c78/dagster_dlt-0.28.3-py3-none-any.whl", hash = "sha256:8402fc72bca638bff799a7f3319184f50ba69fd81a7a535be9da1055915ddfa4", size = 20605, upload-time = "2025-11-20T21:00:44.318Z" },
+]
+
+[[package]]
 name = "dagster-graphql"
 version = "1.12.3"
 source = { registry = "https://pypi.org/simple" }
@@ -569,6 +582,7 @@ source = { virtual = "." }
 dependencies = [
     { name = "dagster" },
     { name = "dagster-dg-cli" },
+    { name = "dagster-dlt" },
     { name = "dagster-webserver" },
     { name = "dlt", extra = ["parquet", "postgres"] },
     { name = "fastf1" },
@@ -578,6 +592,7 @@ dependencies = [
 requires-dist = [
     { name = "dagster" },
     { name = "dagster-dg-cli", specifier = ">=1.12.3" },
+    { name = "dagster-dlt" },
     { name = "dagster-webserver", specifier = ">=1.12.3" },
     { name = "dlt", specifier = ">=1.18.2" },
     { name = "dlt", extras = ["parquet"] },

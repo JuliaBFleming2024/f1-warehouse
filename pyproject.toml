@@ -12,4 +12,15 @@ dependencies = [
     "fastf1>=3.7.0",
     "dlt[postgres]",
     "dlt[parquet]",
+    "dagster_dlt"
 ]
+
+[tool.dagster]
+module_name = "dagster_project.definitions"
+code_location_name = "f1-warehouse"
+
+[tool.dg]
+directory_type = "project"
+
+[tool.dg.project]
+root_module = "dagster_project"
