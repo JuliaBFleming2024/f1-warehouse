@@ -12,7 +12,8 @@ dependencies = [
     "fastf1>=3.7.0",
     "dlt[postgres]",
     "dlt[parquet]",
-    "dagster_dlt"
+    "dagster_dlt",
+    "ruff",
 ]
 
 [tool.dagster]
