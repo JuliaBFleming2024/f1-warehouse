@@ -1,22 +1,16 @@
 import fastf1
 import dlt
-import datetime
 from dagster import get_dagster_logger
 from dlt import pipeline
 import pandas as pd
 
 logger = get_dagster_logger()
 
-current_year = datetime.date.today().year
 
 @dlt.source
-def fastf1_source(
-    partition_key = 0):
-
+def fastf1_source(partition_key=0):
     @dlt.resource(
-        name='schedule',
-        write_disposition='merge',
-        primary_key=['year','round_number']
+        name="schedule", write_disposition="merge", primary_key=["year", "round_number"]
     )
     def events_schedule():
         logger.info(f"Loading events schedule for {partition_key} F1 season")
@@ -25,10 +19,17 @@ def fastf1_source(
         events["year"] = partition_key
         yield events
 
+    @dlt.resource(
+        name="race_results",
+    )
+    def race_results():
+        raw = fastf1.get_session()  # year, #circuit name, #'Race'
+        yield raw
+
     return events_schedule
 
-if __name__ == "__main__":
 
+if __name__ == "__main__":
     pipeline = dlt.pipeline(
         pipeline_name="fastf1",
         destination="postgres",
