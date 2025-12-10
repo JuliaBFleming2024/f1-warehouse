@@ -19,13 +19,6 @@ def fastf1_source(partition_key=0):
         events["year"] = partition_key
         yield events
 
-    @dlt.resource(
-        name="race_results",
-    )
-    def race_results():
-        raw = fastf1.get_session()  # year, #circuit name, #'Race'
-        yield raw
-
     return events_schedule
 
 
