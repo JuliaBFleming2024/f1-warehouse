@@ -4,7 +4,23 @@ from dagster import get_dagster_logger
 from dlt import pipeline
 import pandas as pd
 
+
 logger = get_dagster_logger()
+
+
+def convert_durations_to_string(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Converts all columns with pandas timedelta64[ns] dtype to string type
+    to bypass casting errors caused by NaNs.
+    """
+    for col_name, dtype in df.dtypes.items():
+        if pd.api.types.is_timedelta64_dtype(dtype):
+            # Convert timedelta to total nanoseconds (float64 if NaNs exist)
+            nanoseconds_float = df[col_name].dt.total_seconds() * 1e9
+
+            # Convert the resulting float/NaN series to string type
+            df[col_name] = nanoseconds_float.astype(str)
+    return df
 
 
 @dlt.source
@@ -19,7 +35,31 @@ def fastf1_source(partition_key=0):
         events["year"] = partition_key
         yield events
 
-    return events_schedule
+    @dlt.resource(
+        name="race_results",
+        write_disposition="merge",
+        # write_disposition="append"
+        primary_key=["year", "location", "driver_number"],
+    )
+    def race_results():
+        schedule = fastf1.get_event_schedule(int(partition_key))
+        events = pd.DataFrame(schedule)
+
+        for _, race in events.iterrows():
+            location = race["Location"]
+            event_name = race["EventName"]
+
+            logger.info(f"Loading Race Results from {location} {partition_key}")
+
+            session = fastf1.get_session(int(partition_key), event_name, "Race")
+
+            session.load()
+            results = pd.DataFrame(session.results).reset_index(drop=True)
+            results["year"] = partition_key
+            results["location"] = event_name
+            yield results
+
+    return events_schedule, race_results.add_map(convert_durations_to_string)
 
 
 if __name__ == "__main__":
