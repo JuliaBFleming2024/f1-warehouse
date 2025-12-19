@@ -15,7 +15,7 @@ dependencies = [
     "dagster_dlt",
     "ruff",
     "dagster-dbt>=0.28.3",
-    "dbt-duckdb>=1.10.0",
+    "dbt-postgres>=1.9.1",
 ]
 
 [tool.dagster]
