@@ -69,3 +69,10 @@ if __name__ == "__main__":
     )
     load_info = pipeline.run(fastf1_source(partition_key=2020))
     print(f"Load info: {load_info}")
+
+# TODO (incremental ingestion):
+#   Replace season-based partitioning with true incremental loads driven by race timestamps.
+#   Instead of iterating all events for a given year, persist the latest ingested race/session
+#   timestamp and only pull races whose scheduled start time is > last_loaded_ts.
+#   Apply a safety buffer (e.g., load races 24 hours after scheduled start) to ensure results
+#   are finalized before ingestion.
