@@ -2,7 +2,7 @@ select
     {{ dbt_utils.generate_surrogate_key([
         'round_number',
         'year'
-    ]) }} as race_id,
+    ]) }} as event_id,
     round_number,
     year::int as year,
     country,
