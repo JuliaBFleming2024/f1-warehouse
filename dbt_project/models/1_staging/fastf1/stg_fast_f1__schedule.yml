@@ -1,0 +1,144 @@
+version: 2
+
+models:
+  - name: stg_fast_f1__schedule
+    description: >
+      Staging model that cleans and standardizes Formula 1 event schedule data
+      extracted from the FastF1 API. One record represents a single Formula 1
+      event weekend for a given season.
+
+    columns:
+      - name: event_weekend_id
+        data_type: text
+        description: >
+          Primary key. Surrogate identifier generated from the Formula 1 season
+          year and the event weekend round number.
+        tests:
+          - not_null
+          - unique
+
+      - name: round_number
+        data_type: bigint
+        description: >
+          Sequential identifier assigned to each Formula 1 event weekend within
+          a season.
+        tests:
+          - not_null
+
+      - name: year
+        data_type: integer
+        description: Formula 1 championship season year.
+        tests:
+          - not_null
+
+      - name: country
+        data_type: character varying
+        description: Country hosting the Formula 1 event weekend.
+        tests:
+          - not_null
+
+      - name: city
+        data_type: character varying
+        description: City or locality hosting the Formula 1 event weekend.
+
+      - name: official_event_name
+        data_type: character varying
+        description: >
+          Official FIA-designated name of the Formula 1 event weekend.
+
+      - name: event_on
+        data_type: date
+        description: >
+          Calendar date on which the main race (Grand Prix) takes place.
+        tests:
+          - not_null
+
+      - name: event_name
+        data_type: character varying
+        description: >
+          Informal or commonly used name of the Formula 1 event weekend.
+
+      - name: event_format
+        data_type: character varying
+        description: >
+          Format of the race weekend, such as standard, sprint, or sprint shootout.
+
+      - name: session_1_type
+        data_type: character varying
+        description: >
+          Type of the first scheduled session of the event weekend
+          (e.g., Practice 1).
+
+      - name: session_1_at
+        data_type: timestamp with time zone
+        description: >
+          Local timestamp indicating when the first session starts.
+
+      - name: session_1_at__utc
+        data_type: timestamp with time zone
+        description: >
+          UTC timestamp indicating when the first session starts.
+
+      - name: session_2_type
+        data_type: character varying
+        description: >
+          Type of the second scheduled session of the event weekend
+          (e.g., Practice 2 or Qualifying).
+
+      - name: session_2_at
+        data_type: timestamp with time zone
+        description: >
+          Local timestamp indicating when the second session starts.
+
+      - name: session_2_at__utc
+        data_type: timestamp with time zone
+        description: >
+          UTC timestamp indicating when the second session starts.
+
+      - name: session_3_type
+        data_type: character varying
+        description: >
+          Type of the third scheduled session of the event weekend
+          (e.g., Practice 3 or Sprint).
+
+      - name: session_3_at
+        data_type: timestamp with time zone
+        description: >
+          Local timestamp indicating when the third session starts.
+
+      - name: session_3_at__utc
+        data_type: timestamp with time zone
+        description: >
+          UTC timestamp indicating when the third session starts.
+
+      - name: session_4_type
+        data_type: text
+        description: >
+          Type of the fourth scheduled session of the event weekend
+          (e.g., Sprint or Qualifying).
+
+      - name: session_4_at
+        data_type: timestamp with time zone
+        description: >
+          Local timestamp indicating when the fourth session starts.
+
+      - name: session_4_at__utc
+        data_type: timestamp with time zone
+        description: >
+          UTC timestamp indicating when the fourth session starts.
+
+      - name: session_5_type
+        data_type: text
+        description: >
+          Type of the fifth scheduled session of the event weekend
+          (typically the Race).
+
+      - name: session_5_at
+        data_type: timestamp with time zone
+        description: >
+          Local timestamp indicating when the race session starts.
+
+      - name: session_5_at__utc
+        data_type: timestamp with time zone
+        description: >
+          UTC timestamp indicating when the race session starts.
