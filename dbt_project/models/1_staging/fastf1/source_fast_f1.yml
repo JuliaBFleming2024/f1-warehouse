@@ -5,9 +5,9 @@ sources:
       - name: schedule
         database: raw
         description: >
-          Records of F1 season events.
+          Records of Formula 1 season event weekends
       - name: race_results
         database: raw
         description: >
-          Records of F1 race results per driver.
+          Records of Formula 1 race results per driver.
         
