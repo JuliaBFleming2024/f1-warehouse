@@ -1,0 +1,13 @@
+sources:
+  - name: fastf1_dataset
+    description: Connection to neon serverless postgres database fast_f1 tables
+    tables:
+      - name: schedule
+        database: raw
+        description: >
+          Records of Formula 1 season event weekends
+      - name: race_results
+        database: raw
+        description: >
+          Records of Formula 1 race results per driver.
+        

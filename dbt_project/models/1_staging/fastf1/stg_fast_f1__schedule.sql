@@ -1,0 +1,30 @@
+select
+    {{ dbt_utils.generate_surrogate_key([
+        'round_number',
+        'year'
+    ]) }} as event_weekend_id,
+    round_number,
+    year::int as year,
+    country,
+    location as city,
+    official_event_name,
+    event_date::date as event_on,
+    event_name,
+    event_format,
+    session1 as session_1_type,
+    session1_date as session_1_at,
+    session1_date_utc as session_1_at__utc,
+    session2 as session_2_type,
+    session2_date as session_2_at,
+    session2_date_utc as session_2_at__utc,
+    session3 as session_3_type,
+    session3_date as session_3_at,
+    session3_date_utc as session_3_at__utc,
+    nullif(session4,'None') as session_4_type,
+    session4_date as session_4_at,
+    session4_date_utc as session_4_at__utc,
+    nullif(session5,'None') as session_5_type,
+    session5_date as session_5_at,
+    session5_date_utc as session_5_at__utc,
+    f1_api_support
+from {{ source('fastf1_dataset','schedule')}}
