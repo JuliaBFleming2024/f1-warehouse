@@ -10,4 +10,3 @@ select
     is_final_session
 from
     {{ ref('int_unpivot_weekends_to_sessions') }}
-
