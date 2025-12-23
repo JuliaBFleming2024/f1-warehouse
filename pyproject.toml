@@ -16,6 +16,8 @@ dependencies = [
     "ruff",
     "dagster-dbt>=0.28.3",
     "dbt-postgres>=1.9.1",
+    "sqlfluff>=3.5.0",
+    "sqlfluff-templater-dbt>=3.5.0",
 ]
 
 [tool.dagster]
