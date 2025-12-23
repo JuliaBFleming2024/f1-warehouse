@@ -8,6 +8,9 @@ models:
         data_type: text
         description: >
           Primary Key, Generated surrogate key unique to an event weekend and a session.
+        tests:
+          - not_null
+          - unique
 
       - name: event_weekend_id
         data_type: text
