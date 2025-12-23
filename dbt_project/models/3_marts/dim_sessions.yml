@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: dim_sessions
+    description: Table with record for each session (Race, Sprint, Qualifying, Practice)
+    columns:
+      - name: session_id
+        data_type: text
+        description: >
+          Primary Key, Generated surrogate key unique to an event weekend and a session.
+        tests:
+          - not_null
+          - unique
+
+      - name: event_weekend_id
+        data_type: text
+        description: Generated surrogate key unique to a Formula 1 weekend with events per year.
+
+      - name: year
+        data_type: integer
+        description: Calendar year of Formula 1 season.
+
+      - name: country
+        data_type: character varying
+        description: Country of Formula 1 session.
+
+      - name: city
+        data_type: character varying
+        description: City of Formual 1 sessions.
+
+      - name: weekend_session_number
+        data_type: integer
+        description: >
+          Sequential number assigned to a session within an event weekend.
+
+      - name: session_type
+        data_type: character varying
+        description: >
+          Type of the scheduled session of the event weekend
+          (e.g., Practice 2, Qualifying, Race).
+
+      - name: session_at_utc
+        data_type: timestamp with time zone
+        description: UTC timestamp indicating when the second session starts.
