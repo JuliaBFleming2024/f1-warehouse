@@ -27,4 +27,4 @@ select
     session5_date as session_5_at,
     session5_date_utc as session_5_at__utc,
     f1_api_support
-from {{ source('fastf1_dataset','schedule')}}
+from {{ source('fastf1_dataset','schedule') }}
