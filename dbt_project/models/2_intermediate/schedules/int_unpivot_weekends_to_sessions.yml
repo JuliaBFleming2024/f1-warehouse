@@ -42,3 +42,9 @@ models:
       - name: session_at_utc
         data_type: timestamp with time zone
         description: UTC timestamp indicating when the second session starts.
+
+      - name: is_final_session
+        data_type: boolean
+        description: >
+          True if the session is the final session of the event weekend.
+          This is often, but not always the 'Race' session.
