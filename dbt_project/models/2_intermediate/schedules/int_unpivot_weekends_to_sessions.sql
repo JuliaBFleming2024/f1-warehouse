@@ -84,5 +84,7 @@ select
         'event_weekend_id',
         'weekend_session_number'
     ]) }} as session_id,
-    *
+    *,
+    case when lead(session_type,1) over (partition by event_weekend_id order by session_at asc) is null then True 
+    else False end as is_final_session
 from sessions
