@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: stg_fast_f1__schedule
+    description: >
+      Staging model that cleans and standardizes Formula 1 race results
+      extracted from the FastF1 API.
+    columns:
+      - name: year
+        data_type: integer
+        description: Formula 1 championship season year.
+        tests:
+          - not_null
+      - name: driver_number
+        data_type: character varying
+        description: Number id assigned to the driver for the season year.
+        tests:
+          - not_null
+      - name: broadcast_name
+        data_type: character varying
+        description:
+      
+      
