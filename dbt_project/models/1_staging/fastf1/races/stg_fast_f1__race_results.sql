@@ -25,8 +25,8 @@ select
         else classified_position
     end as classified_position,
     grid_position::int as starting_grid_position,
-    nullif(time::numeric, 'NaN') as time,
-    {{ format_duration_ns('time') }} as time__formated,
+    nullif(time::numeric, 'NaN') as interval_time__ns,
+    {{ format_duration_ns('time') }} as interval_time__formatted,
     status,
     points::int as points_awarded,
     laps::int as lap_count

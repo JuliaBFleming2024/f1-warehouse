@@ -85,14 +85,14 @@ models:
         data_type: integer
         description: Position in which driver started at the race start. 
 
-      - name: time
+      - name: interval_time__ns
         data_type: numeric
         description: >
           Finishing time in nanoseconds. This is the entire length of the race for the race winner.
             For all other finishers, this time represents their finish time from the race winner. Null 
             time indicates the driver did not finish the race.
 
-      - name: time__formated
+      - name: interval_time__formatted
         data_type: text
         description: >
           Finishing time in format Hours:Minutes:Seconds:Milliseconds. This is the entire length of the race for the race winner.
