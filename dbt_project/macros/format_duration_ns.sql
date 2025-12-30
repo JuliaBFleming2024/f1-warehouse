@@ -1,10 +1,11 @@
 {% macro format_duration_ns(time_column) %}
 (
-    --This macro will take a duration in nanoseconds, and format in a 
-    --  Hour:Minute:Second:Milisecond. Nanoseonds is the default timing returned 
+    --This macro will take a duration in nanoseconds and format it into
+    --  Hour:Minute:Second:Milisecond (H:M:S:MS) format. Nanoseonds is the default timing returned 
     --  by the fastf1 resource. If a different unit is found, convert to nano first 
     --  before calling the macro. (Note, if I end up having a mix of units in the future,
-    --  change the macro so that it converts from seconds always convert before calling)
+    --  change the macro so that it assumes it's passed seconds)
+    
     case
         when cast({{ time_column }} as numeric) = 'NaN' then null
         else lpad(
