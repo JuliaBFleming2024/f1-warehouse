@@ -39,7 +39,6 @@ models:
           Unique character id for a driver.  This is often last name, first_lastname if last name
           has been used in formula one before. Think of these as a username.
 
-
       - name: team_name
         data_type: character varying
         description: The team name of the driver.
