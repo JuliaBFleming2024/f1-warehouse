@@ -1,0 +1,116 @@
+version: 2
+
+models:
+  - name: stg_fast_f1__race_results
+    description: >
+      Staging model that cleans and standardizes Formula 1 race results
+      extracted from the FastF1 API.
+    columns:
+      - name: race_year_driver_id
+        data_type: character varying
+        description: Primary Key. Generated id unique to the a Grand Prix location, year, and a driver.
+        tests:
+          - not_null
+          - unique
+
+      - name: year
+        data_type: character varying
+        description: Season/calendar year of the race.
+
+      - name: race_name
+        data_type: character varying
+        description: Name of the Race following the format location + 'Grand Prix'.
+
+      - name: driver_number
+        data_type: character varying
+        description: Number of driver. Note these change frequently year over year.
+
+      - name: broadcast_name
+        data_type: character varying
+        description: The Name of the Driver as shown on the official broadcast.
+
+      - name: driver_last_name_abbreviation
+        data_type: character varying
+        description: Three letter abbreviation of the driver's last name.
+
+      - name: driver_id
+        data_type: character varying
+        description: >
+          Unique character id for a driver.  This is often last name, first_lastname if last name
+          has been used in formula one before. Think of these as a username.
+
+      - name: team_name
+        data_type: character varying
+        description: The team name of the driver.
+
+      - name: team_hex_color_code
+        data_type: character varying
+        description: Hex color code of the driver's team's official color.
+
+      - name: team_id
+        data_type: character varying
+        description: Character id of a team name. Think of these as a username.
+
+      - name: driver_first_name
+        data_type: character varying
+        description: First name of the driver.
+
+      - name: driver_last_name
+        data_type: character varying
+        description: Last name of the driver.
+
+      - name: driver_full_name
+        data_type: character varying
+        description: Full name of the driver.
+
+      - name: driver_head_shot
+        data_type: character varying
+        description: URL link to the headshot of the driver.
+
+      - name: driver_country_code
+        data_type: character varying
+        description: Three letter abbreviation of the country the driver races under.
+
+      - name: position
+        data_type: integer
+        description: Finishing position of the driver. Null value means that driver did not finish.
+
+      - name: classified_position
+        data_type: character varying
+        description: >
+          Finishing Position of the driver. A Number indictates the order in which the driver finished, 
+          'Did not Start' or 'Retired'
+
+      - name: starting_grid_position
+        data_type: integer
+        description: Position in which driver started at the race start. 
+
+      - name: interval_time__ns
+        data_type: numeric
+        description: >
+          Finishing time in nanoseconds. This is the entire length of the race for the race winner.
+            For all other finishers, this time represents their finish time from the race winner. Null 
+            time indicates the driver did not finish the race.
+
+      - name: interval_time__formatted
+        data_type: text
+        description: >
+          Finishing time in format Hours:Minutes:Seconds:Milliseconds. This is the entire length of the race for the race winner.
+            For all other finishers, this time represents their finish time from the race winner. Null 
+            time indicates the driver did not finish the race.
+
+      - name: status
+        data_type: character varying
+        description: Status of Driver's race result.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Retired', 'Disqualified', 'Finished', 'Did not start', 'Lapped']
+
+      - name: points_awarded
+        data_type: integer
+        description: Number of points driver was awarded from the race.
+
+      - name: lap_count
+        data_type: integer
+        description: Total count of laps driver completed during the race.
