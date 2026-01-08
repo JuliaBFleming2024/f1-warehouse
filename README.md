@@ -3,7 +3,7 @@
 **F1 Warehouse** is an in-progress data engineering project that builds an analytics-ready warehouse for Formula 1 data.
 
 ## Tech Stack
-- **RestAPIs** — Formula 1 data sources  
+- **RestAPIs** — Fastf1 API
 - **DLT** — data ingestion and schema management  
 - **Dagster** — orchestration and asset modeling  
 - **Neon/Postgres** — analytical storage 
