@@ -6,7 +6,7 @@ models:
       Staging model that cleans and standardizes Formula 1 race results
       extracted from the FastF1 API.
     columns:
-      - name: race_year_driver_id
+      - name: driver_race_id
         data_type: character varying
         description: Primary Key. Generated id unique to the a Grand Prix location, year, and a driver.
         tests:

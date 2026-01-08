@@ -3,9 +3,13 @@ select
         'year',
         'location',
         'driver_number'
-    ]) }} as race_year_driver_id,
+    ]) }} as driver_race_id,
+    {{ dbt_utils.generate_surrogate_key([
+        'year',
+        'location',
+    ]) }} as event_weekend_id,
     year,
-    location as race_name,
+    location as event_name,
     driver_number,
     broadcast_name as driver_broadcast_name,
     abbreviation as driver_last_name_abbreviation,
