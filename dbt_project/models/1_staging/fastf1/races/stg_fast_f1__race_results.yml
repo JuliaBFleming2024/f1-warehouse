@@ -13,11 +13,17 @@ models:
           - not_null
           - unique
 
+      - name: event_weekend_id
+        data_type: text
+        description: >
+          Surrogate identifier generated from the Formula 1 season
+          year and the event name.
+
       - name: year
         data_type: character varying
         description: Season/calendar year of the race.
 
-      - name: race_name
+      - name: event_name
         data_type: character varying
         description: Name of the Race following the format location + 'Grand Prix'.
 
