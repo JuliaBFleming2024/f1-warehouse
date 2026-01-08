@@ -8,11 +8,13 @@ with calculate_driver_total_time as (
         classified_position,
         interval_time__ns,
         interval_time__formatted,
-        case when interval_time__ns is not null then
-            sum(interval_time__ns) over (
-                partition by event_weekend_id    
+        case
+            when interval_time__ns is not null
+            then sum(interval_time__ns) over (
+                partition by event_weekend_id
                 order by position
-                rows between unbounded preceding and current row)
+                rows between unbounded preceding and current row
+            )
             else null
         end as total_time__ns,
         points_awarded
@@ -22,5 +24,4 @@ with calculate_driver_total_time as (
 select
     *,
     {{ format_duration_ns('total_time__ns') }} as total_time__formatted
-from 
-    calculate_driver_total_time
+from calculate_driver_total_time
