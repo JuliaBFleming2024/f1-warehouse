@@ -1,0 +1,58 @@
+version: 2
+
+models:
+  - name: fct_race_results
+    description: >
+      Slim fact table representing the race results of a driver in terms of time, position, and points.
+      Provides FKs for race and driver information.
+    columns:
+      - name: driver_race_id
+        data_type: text
+        description: "Primary Key. Generated id unique to the a Grand Prix location, year, and a driver."
+        tests:
+          - not_null
+          - unique
+
+      - name: event_weekend_id
+        data_type: text
+        description: Generated key unique to a year and an event name. 
+
+      - name: driver_number
+        data_type: character varying
+        description: "Number of driver. Note these change frequently year over year."
+
+      - name: starting_grid_position
+        data_type: integer
+        description: "Position in which driver started at the race start."
+
+      - name: position
+        data_type: integer
+        description: "Finishing position of the driver. Null value means that driver did not finish."
+
+      - name: classified_position
+        data_type: character varying
+        description: "Finishing Position of the driver. A Number indictates the order in which the driver finished, Did not Start or Retired"
+
+      - name: interval_time__ns
+        data_type: numeric
+        description: "Finishing time in nanoseconds. This is the entire length of the race for the race winner.
+          For all other finishers, this time represents their delta from the finisher on position earlier. Null 
+          time indicates the driver did not finish the race."
+
+      - name: interval_time__formatted
+        data_type: text
+        description: "Finishing interval time in format Hours:Minutes:Seconds:Milliseconds. This is the entire length of the race for the race winner.
+          For all other finishers, this time represents their delta from the finisher on position earlier. Null 
+          time indicates the driver did not finish the race."
+
+      - name: total_time__ns
+        data_type: numeric
+        description: "Driver's total race time if the driver finished the race."
+
+      - name: total_time__formatted
+        data_type: text
+        description: "Driver's total race time in format Hours:Minutes:Seconds:Milliseconds if the driver completed the race."
+
+      - name: points_awarded
+        data_type: integer
+        description: "Number of points driver was awarded from the race."

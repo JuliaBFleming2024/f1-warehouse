@@ -1,7 +1,7 @@
 select
     {{ dbt_utils.generate_surrogate_key([
-        'round_number',
-        'year'
+        'year',
+        'event_name'
     ]) }} as event_weekend_id,
     round_number,
     year::int as year,
