@@ -12,7 +12,7 @@ models:
         data_type: text
         description: >
           Primary key. Surrogate identifier generated from the Formula 1 season
-          year and the event weekend round number.
+          year and the event name.
         tests:
           - not_null
           - unique
