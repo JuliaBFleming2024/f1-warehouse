@@ -10,4 +10,6 @@ select
     normalized_time__ns,
     normalized_time__formatted,
     points_awarded
-from {{ ref('int_race_results__calculate_total_time') }}
+from 
+    {{ ref('int_race_results__calculate_total_time') }}
+
