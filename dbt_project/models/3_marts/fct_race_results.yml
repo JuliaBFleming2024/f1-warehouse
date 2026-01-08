@@ -45,11 +45,11 @@ models:
           For all other finishers, this time represents their delta from the finisher on position earlier. Null 
           time indicates the driver did not finish the race."
 
-      - name: normalized_time__ns
+      - name: total_time__ns
         data_type: numeric
         description: "Driver's total race time if the driver finished the race."
 
-      - name: normalized_time__formatted
+      - name: total_time__formatted
         data_type: text
         description: "Driver's total race time in format Hours:Minutes:Seconds:Milliseconds if the driver completed the race."
 
