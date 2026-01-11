@@ -33,6 +33,11 @@ models:
       - name: classified_position
         data_type: character varying
         description: "Finishing Position of the driver. A Number indictates the order in which the driver finished, Did not Start or Retired"
+        
+      - name: is_completed_race
+        data_type: boolean
+        description: >
+          True if driver completed all race laps. This includes drivers later disqualified.
 
       - name: interval_time__ns
         data_type: numeric

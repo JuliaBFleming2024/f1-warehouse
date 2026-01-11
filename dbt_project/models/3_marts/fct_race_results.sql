@@ -5,6 +5,7 @@ select
     starting_grid_position,
     position,
     classified_position,
+    is_completed_race,
     interval_time__ns,
     interval_time__formatted,
     total_time__ns,

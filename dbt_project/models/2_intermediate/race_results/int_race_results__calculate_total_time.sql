@@ -6,6 +6,7 @@ with calculate_driver_total_time as (
         starting_grid_position,
         position,
         classified_position,
+        is_completed_race,
         interval_time__ns,
         interval_time__formatted,
         case
