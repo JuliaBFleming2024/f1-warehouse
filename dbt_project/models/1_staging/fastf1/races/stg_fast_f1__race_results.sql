@@ -26,8 +26,13 @@ select
     case
         when classified_position = 'W' then 'Did not Start'
         when classified_position = 'R' then 'Retired'
+        when classified_position = 'D' then 'Disqualified'
         else classified_position
     end as classified_position,
+    case
+        when classified_position in ('W','R') then false
+        else true
+    end as is_completed_race,
     grid_position::int as starting_grid_position,
     nullif(time::numeric, 'NaN') as interval_time__ns,
     {{ format_duration_ns('time') }} as interval_time__formatted,
