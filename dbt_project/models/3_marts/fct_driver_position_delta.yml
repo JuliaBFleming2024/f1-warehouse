@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: fct_driver_position_delta
+    description: >
+      Calculates driver delta of each driver's position to start to finish of each 
+      completed race.
+    columns:
+      - name: driver_race_id
+        data_type: text
+        description: "Primary Key. Generated id unique to the a Grand Prix location, year, and a driver."
+        tests:
+          - unique
+          - not_null
+
+      - name: event_weekend_id
+        data_type: text
+        description: "Generated key unique to a year and an event name."
+
+      - name: driver_number
+        data_type: character varying
+        description: "Number of driver. Note these change frequently year over year."
+      
+      - name: starting_grid_position
+        data_type: integer
+        description: "Position in which driver started at the race start."
+
+      - name: finishing_grid_position
+        data_type: integer
+        description: "Finishing position of the driver."
+
+      - name: position_delta
+        data_type: integer
+        description: Driver race starting position - driver race finishing position.
+
+      - name: position_delta_type
+        data_type: text
+        description: >
+          Category of driver's race in terms of position delta.
+          'Lost', 'Gained', 'Maintained'
