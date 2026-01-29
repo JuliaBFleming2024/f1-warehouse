@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: int_aggregate_drivers
+  - name: int_aggregate_driver_keys
     description: >
       Intermediate model that creates unique driver-team-number combinations
       with their validity periods. Used to build the driver dimension table
