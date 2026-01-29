@@ -40,17 +40,11 @@ jobs:
                 port: 5432
                 sslmode: require
           EOF
-          
+
       - name: Install dbt packages
         run: |
           cd dbt_project
           dbt deps
-        env:
-          DBT_POSTGRES_HOST: ${{ secrets.DBT_POSTGRES_HOST }}
-          DBT_POSTGRES_USER: ${{ secrets.DBT_POSTGRES_USER }}
-          DBT_POSTGRES_PASSWORD: ${{ secrets.DBT_POSTGRES_PASSWORD }}
-          DBT_POSTGRES_DB: ${{ secrets.DBT_POSTGRES_DB }}
-
 
       - name: Run dbt build
         run: |
