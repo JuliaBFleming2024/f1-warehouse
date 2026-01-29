@@ -31,5 +31,5 @@ select
         when valid_to_year = max(valid_to_year) over (partition by driver_id)
         then true
         else false
-    end as is_current
+    end as is_most_recent_record
 from driver_periods
