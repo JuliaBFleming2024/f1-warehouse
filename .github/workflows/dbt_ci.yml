@@ -23,6 +23,24 @@ jobs:
         run: |
           pip install dbt-postgres dbt-core
 
+      - name: Create dbt profiles.yml
+        run: |
+          mkdir -p ~/.dbt
+          cat > ~/.dbt/profiles.yml << EOF
+          f1_warehouse:
+            target: ci
+            outputs:
+              ci:
+                type: postgres
+                host: ${{ secrets.DBT_POSTGRES_HOST }}
+                user: ${{ secrets.DBT_POSTGRES_USER }}
+                password: ${{ secrets.DBT_POSTGRES_PASSWORD }}
+                database: ${{ secrets.DBT_POSTGRES_DB }}
+                schema: ci
+                port: 5432
+                sslmode: require
+          EOF
+
       - name: Run dbt build
         run: |
           cd dbt_project
