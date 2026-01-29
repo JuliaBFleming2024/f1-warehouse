@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: int_aggregate_drivers
+    description: >
+      Intermediate model that creates unique driver-team-number combinations
+      with their validity periods. Used to build the driver dimension table
+      with historical tracking of team changes and number reassignments.
+    columns:
+      - name: driver_key
+        data_type: character varying
+        description: >
+          Surrogate key that uniquely identifies each driver-team-season 
+            combination, enabling historical tracking of driver attributes 
+            including mid-season team changes.
+        tests:
+          - not_null
+          - unique
