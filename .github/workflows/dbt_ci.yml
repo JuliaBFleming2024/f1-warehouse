@@ -27,7 +27,7 @@ jobs:
         run: |
           mkdir -p ~/.dbt
           cat > ~/.dbt/profiles.yml << EOF
-          f1_warehouse:
+          dbt_project:
             target: ci
             outputs:
               ci:
