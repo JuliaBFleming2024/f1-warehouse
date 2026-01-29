@@ -1,0 +1,58 @@
+name: dbt full build CI
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  dbt-build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies
+        run: |
+          pip install dbt-postgres dbt-core
+
+      - name: Create dbt profiles.yml
+        run: |
+          mkdir -p ~/.dbt
+          cat > ~/.dbt/profiles.yml << EOF
+          dbt_project:
+            target: ci
+            outputs:
+              ci:
+                type: postgres
+                host: ${{ secrets.DBT_POSTGRES_HOST }}
+                user: ${{ secrets.DBT_POSTGRES_USER }}
+                password: ${{ secrets.DBT_POSTGRES_PASSWORD }}
+                database: ${{ secrets.DBT_POSTGRES_DB }}
+                schema: ci
+                port: 5432
+                sslmode: require
+          EOF
+
+      - name: Install dbt packages
+        run: |
+          cd dbt_project
+          dbt deps
+
+      - name: Run dbt build
+        run: |
+          cd dbt_project
+          dbt build
+        env:
+          DBT_POSTGRES_HOST: ${{ secrets.DBT_POSTGRES_HOST }}
+          DBT_POSTGRES_USER: ${{ secrets.DBT_POSTGRES_USER }}
+          DBT_POSTGRES_PASSWORD: ${{ secrets.DBT_POSTGRES_PASSWORD }}
+          DBT_POSTGRES_DB: ${{ secrets.DBT_POSTGRES_DB }}
+          DBT_POSTGRES_SCHEMA: "ci"
