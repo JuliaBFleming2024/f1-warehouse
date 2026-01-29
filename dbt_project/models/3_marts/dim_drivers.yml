@@ -1,0 +1,105 @@
+version: 2
+
+models:
+  - name: dim_drivers
+    description: >
+      Driver dimension table tracking driver attributes over time using 
+      SCD Type 2. Each record represents a unique driver-team-season 
+      combination, capturing changes in team affiliation, driver numbers, 
+      and other attributes across Formula 1 seasons, including mid-season 
+      team changes.
+    columns:
+      - name: driver_key
+        data_type: character varying
+        description: >
+          Primary key for the driver dimension table. Surrogate key generated 
+          from driver_id, team_id, and valid_from_year to uniquely identify 
+          each version of a driver's attributes. Captures changes in team, 
+          driver number, or other attributes across seasons, including 
+          mid-season team changes (e.g., reserve driver stints).
+        tests:
+          - not_null
+          - unique
+
+      - name: driver_id
+        data_type: character varying
+        description: >
+          Natural key for a driver. Unique character identifier often based 
+          on last name, or first_lastname if the last name has been used in 
+          Formula 1 before. Think of these as a username.
+        tests:
+          - not_null
+
+      - name: driver_number
+        data_type: character varying
+        description: >
+          Driver's racing number. Note these can change year over year or 
+          even mid-season for reserve drivers.
+
+      - name: driver_last_name_abbreviation
+        data_type: character varying
+        description: Three letter abbreviation of the driver's last name.
+
+      - name: driver_first_name
+        data_type: character varying
+        description: First name of the driver.
+
+      - name: driver_last_name
+        data_type: character varying
+        description: Last name of the driver.
+
+      - name: driver_full_name
+        data_type: character varying
+        description: Full name of the driver.
+
+      - name: broadcast_name
+        data_type: character varying
+        description: The name of the driver as shown on the official broadcast.
+
+      - name: driver_head_shot
+        data_type: character varying
+        description: URL link to the headshot of the driver.
+
+      - name: driver_country_code
+        data_type: character varying
+        description: Three letter abbreviation of the country the driver races under.
+
+      - name: team_name
+        data_type: character varying
+        description: The team name of the driver for this period.
+        tests:
+          - not_null
+
+      - name: team_id
+        data_type: character varying
+        description: Character identifier of the team. Think of these as a username.
+        tests:
+          - not_null
+
+      - name: team_hex_color_code
+        data_type: character varying
+        description: Hex color code of the team's official color.
+
+      - name: valid_from_year
+        data_type: integer
+        description: >
+          First season year where the driver had this combination of 
+          team and driver number.
+        tests:
+          - not_null
+
+      - name: valid_to_year
+        data_type: integer
+        description: >
+          Last season year where the driver had this combination of 
+          team and driver number.
+        tests:
+          - not_null
+
+      - name: is_most_recent_record
+        data_type: boolean
+        description: >
+          True if this is the driver's most recent team/number combination 
+          in the dataset. Each driver will have exactly one current record.
+        tests:
+          - not_null
